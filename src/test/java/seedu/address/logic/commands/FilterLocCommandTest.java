@@ -64,10 +64,9 @@ public class FilterLocCommandTest {
         assertEquals(Collections.emptyList(), bModel.getFilteredBuyerList());
     }
 
-    /*
     @Test
     public void execute_multipleKeywords_multipleBuyersFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
         LocationContainsKeywordsPredicate<Buyer> predicate = preparePredicateBuyer("Singapore");
         FilterLocCommand command = new FilterLocCommand(predicate,
                 new LocationContainsKeywordsPredicate<>("Singapore"),
@@ -79,7 +78,6 @@ public class FilterLocCommandTest {
     }
 
 
-     */
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
