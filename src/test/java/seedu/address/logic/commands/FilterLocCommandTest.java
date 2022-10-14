@@ -73,27 +73,37 @@ public class FilterLocCommandTest {
                 new LocationContainsKeywordsPredicate<>("Singapore"));
         bExpectedModel.updateFilteredBuyerList(predicate);
         assertCommandSuccess(command, bModel, expectedMessage, bExpectedModel);
-        assertEquals(TypicalBuyers.getTypicalBuyers(),
-                bModel.getFilteredBuyerList());
+        assertEquals(TypicalBuyers.getTypicalBuyers(), bModel.getFilteredBuyerList());
+    }
+
+    @Test
+    public void execute_multipleKeywords_multipleDeliverersFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
+        LocationContainsKeywordsPredicate<Deliverer> predicate = preparePredicateDeliverer("Singapore");
+        FilterLocCommand command = new FilterLocCommand(new LocationContainsKeywordsPredicate<>("Singapore"),
+                predicate, new LocationContainsKeywordsPredicate<>("Singapore"));
+        dExpectedModel.updateFilteredDelivererList(predicate);
+        assertCommandSuccess(command, dModel, expectedMessage, dExpectedModel);
+        assertEquals(TypicalDeliverers.getTypicalDeliverers(), dModel.getFilteredDelivererList());
     }
 
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code LocationContainsKeywordsPredicate}.
      */
     private LocationContainsKeywordsPredicate<Buyer> preparePredicateBuyer(String userInput) {
         return new LocationContainsKeywordsPredicate<>(userInput.trim());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code LocationContainsKeywordsPredicate}.
      */
     private LocationContainsKeywordsPredicate<Deliverer> preparePredicateDeliverer(String userInput) {
         return new LocationContainsKeywordsPredicate<>(userInput.trim());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code LocationContainsKeywordsPredicate}.
      */
     private LocationContainsKeywordsPredicate<Supplier> preparePredicateSupplier(String userInput) {
         return new LocationContainsKeywordsPredicate<>(userInput.trim());

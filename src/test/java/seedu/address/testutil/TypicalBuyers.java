@@ -42,8 +42,8 @@ public class TypicalBuyers {
             .withLocation("Singapore")
             .withTags("owesMoney", "friends").buildBuyer();
     public static final Buyer CARL = new PersonBuilder().withPersonCategory("Buyer").withName("Carl Kurz")
-            .withPhone("95352563").withEmail("heinz@example.com").withAddress("wall street").
-            withLocation("Singapore").buildBuyer();
+            .withPhone("95352563").withEmail("heinz@example.com").withAddress("wall street")
+            .withLocation("Singapore").buildBuyer();
     public static final Buyer DANIEL = new PersonBuilder().withPersonCategory("Buyer").withName("Daniel Meier")
             .withPhone("87652533").withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
             .withLocation("Singapore").buildBuyer();
