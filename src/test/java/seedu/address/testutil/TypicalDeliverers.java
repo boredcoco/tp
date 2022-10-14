@@ -42,8 +42,8 @@ public class TypicalDeliverers {
             .withPhone("95352563").withEmail("heinz@example.com").withAddress("wall street")
             .withLocation("Singapore").buildDeliverer();
     public static final Deliverer DANIEL = new PersonBuilder().withPersonCategory("Deliverer").withName("Daniel Meier")
-            .withPhone("87652533").withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
-            .withLocation("Singapore").buildDeliverer();
+            .withPhone("87652533").withEmail("cornelia@example.com").withAddress("10th street")
+            .withLocation("Singapore").withTags("friends").buildDeliverer();
     public static final Deliverer ELLE = new PersonBuilder().withPersonCategory("Deliverer").withName("Elle Meyer")
             .withPhone("9482224").withEmail("werner@example.com").withAddress("michegan ave")
             .withLocation("Singapore").buildDeliverer();
