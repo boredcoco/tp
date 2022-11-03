@@ -26,6 +26,12 @@ public class CheckCommandParserTest {
     }
 
     @Test
+    public void parse_invalidPrefixInvalidInput_throwsParseException() {
+        assertParseFailure(parser, "1 in/hjbrf", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                CheckCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_emptyString_throwsParseException() {
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 CheckCommand.MESSAGE_USAGE));
