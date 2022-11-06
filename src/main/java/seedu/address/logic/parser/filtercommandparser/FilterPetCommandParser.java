@@ -1,10 +1,13 @@
 package seedu.address.logic.parser.filtercommandparser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.filtercommands.FilterPetCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.PredicateParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -41,7 +44,7 @@ public class FilterPetCommandParser implements Parser<FilterPetCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterPetCommand.MESSAGE_USAGE));
         }
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        //String[] nameKeywords = trimmedArgs.split("\\s+");
 
         Predicate<Pet> colorPredicate = defaultPredicate;
         Predicate<Pet> namePredicate = defaultPredicate;
@@ -49,6 +52,36 @@ public class FilterPetCommandParser implements Parser<FilterPetCommand> {
         Predicate<Pet> speciesPredicate = defaultPredicate;
         Predicate<Pet> vaccinationPredicate = defaultPredicate;
 
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(trimmedArgs, PREFIX_PET_COLOR, PREFIX_PET_COLOR_PATTERN, PREFIX_PET_PRICE,
+                        PREFIX_PET_SPECIES, PREFIX_PET_SPECIES, PREFIX_PET_VACCINATION_STATUS);
+
+        if (argMultimap.getValue(PREFIX_PET_COLOR).isPresent()) {
+            colorPredicate = PredicateParser.parsePet(PREFIX_PET_COLOR.getPrefix()
+                    + argMultimap.getValue(PREFIX_PET_COLOR).get());
+        }
+
+        if (argMultimap.getValue(PREFIX_PET_COLOR_PATTERN).isPresent()) {
+            colorPredicate = PredicateParser.parsePet(PREFIX_PET_COLOR_PATTERN.getPrefix()
+                    + argMultimap.getValue(PREFIX_PET_COLOR_PATTERN).get());
+        }
+
+        if (argMultimap.getValue(PREFIX_PET_PRICE).isPresent()) {
+            colorPredicate = PredicateParser.parsePet(PREFIX_PET_PRICE.getPrefix() +
+                    argMultimap.getValue(PREFIX_PET_PRICE).get());
+        }
+
+        if (argMultimap.getValue(PREFIX_PET_SPECIES).isPresent()) {
+            colorPredicate = PredicateParser.parsePet(PREFIX_PET_SPECIES.getPrefix() +
+                    argMultimap.getValue(PREFIX_PET_SPECIES).get());
+        }
+
+        if (argMultimap.getValue(PREFIX_PET_VACCINATION_STATUS).isPresent()) {
+            colorPredicate = PredicateParser.parsePet(PREFIX_PET_VACCINATION_STATUS.getPrefix() +
+                    argMultimap.getValue(PREFIX_PET_VACCINATION_STATUS).get());
+        }
+
+        /*
         for (String arg: nameKeywords) {
             arg = arg.trim();
             String[] query = arg.split("/");
@@ -74,6 +107,8 @@ public class FilterPetCommandParser implements Parser<FilterPetCommand> {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterPetCommand.MESSAGE_USAGE));
             }
         }
+
+         */
         return new FilterPetCommand(colorPredicate, namePredicate, pricePredicate, speciesPredicate,
                 vaccinationPredicate);
     }

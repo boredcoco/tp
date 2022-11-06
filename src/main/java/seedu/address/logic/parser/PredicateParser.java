@@ -178,13 +178,22 @@ public class PredicateParser {
         String query = nameKeywords[1].trim();
         switch (nameKeywords[0].trim()) {
         case COLOR_PREFIX:
-            return new ColorContainsKeywordsPredicate<>(Arrays.asList(query));
+            return new ColorContainsKeywordsPredicate<>(Arrays.asList(query.split("\\s+")));
         case PET_NAME_PREFIX:
-            return new PetNameContainsKeywordsPredicate<>(Arrays.asList(query));
+            return new PetNameContainsKeywordsPredicate<>(Arrays.asList(query.split("\\s+")));
         case PRICE_PREFIX:
+            try {
+                Double.parseDouble(query);
+            } catch (NumberFormatException e) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterPetCommand.MESSAGE_USAGE));
+            } catch (NullPointerException e) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterPetCommand.MESSAGE_USAGE));
+            }
             return new PriceContainsKeywordsPredicate<>(Arrays.asList(Double.parseDouble(query)));
         case SPECIES_PREFIX:
-            return new SpeciesContainsKeywordsPredicate<>(Arrays.asList(query));
+            return new SpeciesContainsKeywordsPredicate<>(Arrays.asList(query.split("\\s+")));
         case VACCINATION_PREFIX:
             query = query.trim();
             if (!query.equals(Boolean.toString(true)) && !query.equals(Boolean.toString(false))) {

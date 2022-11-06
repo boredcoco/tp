@@ -19,7 +19,7 @@ public class PetNameContainsKeywordsPredicate<T extends Pet> implements Predicat
     @Override
     public boolean test(T pet) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(pet.getName().fullName, keyword));
+                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(pet.getName().fullName, keyword));
     }
 
     @Override
